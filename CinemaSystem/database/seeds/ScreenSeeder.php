@@ -14,6 +14,7 @@ class ScreenSeeder extends Seeder
         //Check if Screens Table is Empty
         if (DB::table('screens')->get()->count() == 0) {
 
+            //Insert Default Screen
             DB::table('screens')->insert([
                 [
                     'id' => 1,
