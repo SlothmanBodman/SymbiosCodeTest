@@ -15,6 +15,9 @@ class CreateShowingsTable extends Migration
     {
         Schema::create('showings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('movie_id');
+            $table->foreignId('screen_id');
+            $table->dateTime('start_time');
             $table->timestamps();
         });
     }
