@@ -50,7 +50,7 @@ class CustomerController extends Controller
     public function update(Request $request) {
         try {
             
-            //Find and Update Existing Customer
+            //Find Existing Customer
             $customer = Customer::find($request->input('id'));
             if ($customer == null) {
                 return response()->json([
@@ -91,7 +91,29 @@ class CustomerController extends Controller
 
     //Delete Customer
     public function delete(Request $request) {
-        return 'Customer Delete Called';
+        try {
+            //Find Existing Customer
+            $customer = Customer::find($request->input('id'));
+            if ($customer == null) {
+                return response()->json([
+                    'error' => "Customer Not Found"
+                ])->setStatusCode(404);
+            }
+
+            //Delete the Customer
+            $customer->delete();
+
+            //Return Success Message
+            return response()->json([
+                'Message' => 'Customer Deleted'
+            ])->setStatusCode(200);
+        }
+        catch (Throwable $error) {
+            //Return Error Message
+            return response()->json([
+                'error' => $error 
+            ])->setStatusCode(500);
+        }
     }
 
 }
