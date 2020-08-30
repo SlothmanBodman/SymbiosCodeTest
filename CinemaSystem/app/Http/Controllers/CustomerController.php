@@ -48,11 +48,50 @@ class CustomerController extends Controller
 
     //Update Customer
     public function update(Request $request) {
-        return 'Customer Update Called';
+        try {
+            
+            //Find and Update Existing Customer
+            $customer = Customer::find($request->input('id'));
+            if ($customer == null) {
+                return response()->json([
+                    'error' => "Customer Not Found"
+                ])->setStatusCode(404);
+            }
+            
+            //Validate
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|unique:customers,email,'.$request->input('id'),
+                'name' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'error' => $validator->errors()
+                ])->setStatusCode(400);
+            }
+
+            //Update and Save
+            $customer->email = $request->input('email');
+            $customer->name = $request->input('name');
+            $customer->save();
+
+            //Return Success Message
+            return response()->json([
+                'Message' => 'Customer Updated'
+            ])->setStatusCode(200);
+
+    
+        }
+        catch (Throwable $error) {
+            //Return Error Message
+            return response()->json([
+                'error' => $error 
+            ])->setStatusCode(500);
+        }
     }
 
     //Delete Customer
     public function delete(Request $request) {
         return 'Customer Delete Called';
     }
+
 }
