@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Validator;
 
 //Models
 use App\Movie;
-use App\Showing;
-use App\Booking;
-use App\BookedSeat;
 
 class MovieController extends Controller
 {
