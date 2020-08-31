@@ -15,4 +15,9 @@ class Showing extends Model
     public function screen() {
         $this->belongsTo('App\Screen', 'id', 'screen_id');
     }
+
+    //Link Showing to Bookings 
+    public function bookings() {
+        $this->hasMany('App\Booking', 'showing_id', 'id');
+    }
 }
