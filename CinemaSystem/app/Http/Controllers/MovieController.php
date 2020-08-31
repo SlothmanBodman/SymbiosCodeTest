@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 
 //Models
 use App\Movie;
+use App\Showing;
+use App\Booking;
+use App\BookedSeat;
 
 class MovieController extends Controller
 {
@@ -83,6 +86,28 @@ class MovieController extends Controller
 
     //Delete Movie
     public function delete(Request $request) {
-        return 'Movie Delete Called';
+        try {
+            //Find Existing Movie
+            $movie = Movie::find($request->input('id'));
+            if ($movie == null) {
+                return response()->json([
+                    'error' => 'Movie Not Found'
+                ])->setStatusCode(404);
+            }
+
+            //Delete the Movie
+            $movie->delete();
+
+            //Return Success Message
+            return response()->json([
+                'Message' => 'Movie Deleted'
+            ])->setStatusCode(200);
+            
+
+        } catch (Throwable $error) {
+            return response()->json([
+                "error" => $error
+            ])->setStatusCode(500);
+        }
     }
 }
