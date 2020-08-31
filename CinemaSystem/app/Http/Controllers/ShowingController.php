@@ -125,6 +125,29 @@ class ShowingController extends Controller
     
     //Delete Showing
     public function delete(Request $request) {
-        return 'Showing Delete Called';
+        try {
+            
+            //Find Existing Showing
+            $showing = Showing::find($request->input('id'));
+            if ($showing == null) {
+                return response()->json([
+                    'error' => 'Showing Not Found'
+                ])->setStatusCode(404);
+            }
+
+            //Delete Showing
+            $showing->delete();
+
+            //Return Success Message
+            return response()->json([
+                'Message' => 'Showing Deleted'
+            ])->setStatusCode(200);
+
+
+        } catch (Throwable $error) {
+            return response()->json([
+                'error' => $error
+            ])->setStatusCode(500);
+        }
     }
 }
