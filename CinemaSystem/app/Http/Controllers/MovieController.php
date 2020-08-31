@@ -44,7 +44,41 @@ class MovieController extends Controller
 
     //Update Movie
     public function update(Request $request) {
-        return 'Movie Update Called';
+        
+        try {
+            //Find Existing Movie
+            $movie = Movie::find($request->input('id'));
+            if ($movie == null) {
+                return response()->json([
+                    'error' => 'Movie Not Found'
+                ])->setStatusCode(404);
+            }
+
+            //Validate
+            $validator = Validator::make($request->all(), [
+                'name' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'error' => $validator->errors()
+                ])->setStatusCode(400);
+            }
+
+            //update and Save
+            $movie->name = $request->input('name');
+            $movie->save();
+
+            //Return Success Message
+            return response()->json([
+                'Message' => 'Movie Updated'
+            ])->setStatusCode(200);
+
+        } catch (Throwable $error) {
+            //Return Error Message
+            return response()->json([
+                    'error' => $error 
+            ])->setStatusCode(500);
+        }
     }
 
     //Delete Movie
