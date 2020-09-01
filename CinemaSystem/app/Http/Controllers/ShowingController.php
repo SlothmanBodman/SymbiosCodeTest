@@ -142,8 +142,7 @@ class ShowingController extends Controller
             return response()->json([
                 'Message' => 'Showing Deleted'
             ])->setStatusCode(200);
-
-
+            
         } catch (Throwable $error) {
             return response()->json([
                 'error' => $error
