@@ -114,6 +114,67 @@ Json Example:
 }
 ```
 
+### Showings
+
+#### Create Showing
+Route: /api/showing/create
+
+Required Data: 
+
+- movie_id - database id of the movie being shown
+- screen_id - database id of the screen showing is on
+- start_time - DateTime Value including the date and start time of showing
+
+Json Example:
+
+```json
+{
+  "movie_id": 1,
+  "screen_id": 1,
+  "start_time": "2020-09-13 10:00:00";
+}
+```
+
+#### Update Showing
+Route: /api/showing/update
+
+Required Data: 
+
+- id - database id of the showing being updated
+- movie_id - database id of the movie being shown
+- screen_id - database id of the screen showing is on
+- start_time - DateTime Value including the date and start time of showing
+
+Json Example:
+
+```json
+{
+  "id": 1,
+  "movie_id": 2,
+  "screen_id": 1,
+  "start_time": "2020-09-14 14:30:00";
+}
+```
+
+*Note: movie_id, screen_id, and start_time should be passed but remain unchanged, if not being updated*
+
+#### Delete Showing
+Route: /api/showing/delete
+
+Required Data: 
+
+- id - the database id of the showing record being deleted
+
+Json Example:
+
+```json
+{
+  "id": 1
+}
+```
+
+
+
 
 
 
