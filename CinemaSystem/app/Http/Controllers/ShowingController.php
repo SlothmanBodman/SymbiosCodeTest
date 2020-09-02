@@ -23,7 +23,7 @@ class ShowingController extends Controller
                 'start_time' => 'required|date'
             ]);
             if ($validator->fails()) {
-                return reponse()->json([
+                return response()->json([
                     'error' => $validator->errors()
                 ])->setStatusCode(400);
             }
