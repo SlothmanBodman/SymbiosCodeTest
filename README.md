@@ -24,7 +24,7 @@ Json Example:
 
 ```json
 {
-  "email": "email@email.com"
+  "email": "email@email.com",
   "name": "John Doe"
 }
 ```
@@ -43,7 +43,7 @@ Json Example:
 ```json
 {
   "id": 1,
-  "email": "email@email.com"
+  "email": "email@email.com",
   "name": "John Doe"
 }
 ```
@@ -64,6 +64,57 @@ Json Example:
   "id": 1
 }
 ```
+
+### Movies
+
+#### Create Movie
+Route: /api/movie/create
+
+Required Data: 
+
+- name - the movie name
+
+Json Example:
+
+```json
+{
+  "name": "Raiders of the Lost Ark"
+}
+```
+
+#### Update Movie
+Route: /api/movie/update
+
+Required Data: 
+
+- id - the database id of the movie record being updated
+- name - the movie name
+
+Json Example:
+
+```json
+{
+  "id": 1,
+  "name": "Indiana Jones and the Temple of Doom"
+}
+```
+
+#### Delete Movie
+Route: /api/movie/delete
+
+Required Data: 
+
+- id - the database id of the movie record being deleted
+
+Json Example:
+
+```json
+{
+  "id": 1
+}
+```
+
+
 
 
 
