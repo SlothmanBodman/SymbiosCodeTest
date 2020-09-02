@@ -193,6 +193,41 @@ class BookingController extends Controller
     
         //Delete Booking
         public function delete(Request $request) {
-                return 'Booking Delete Called';
+                try {
+                        // Validate Request
+                        $validator = Validator::make($request->all(), [
+                                'id' => 'required',
+                        ]);
+                        if ($validator->fails()) {
+                                return response()->json([
+                                    'error' => $validator->errors()
+                                ])->setStatusCode(400);
+                        }
+
+                        //Get and Check Booking Exists
+                        $booking = Booking::find($request->input('id'));
+                        if ($booking == null) {
+                                return response()->json([
+                                        'error' => 'Booking Not Found'
+                                ]);
+                        }
+
+                        //Delete Booking 
+                        $booking->delete();
+
+                        //Delete Booked Seats 
+                        BookedSeat::where('booking_id', $request->input('id'))->delete();
+
+                        return response()->json([
+                                'Message' => 'Booking Deleted'
+                        ])->setStatusCode(200);
+
+
+
+                } catch (Throwable $error) {
+                        return response()->json([
+                                'error' => $error
+                        ])->setStatusCode(500);
+                }
         }
 }
