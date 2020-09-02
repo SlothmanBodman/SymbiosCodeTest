@@ -197,7 +197,7 @@ Json Example:
 #### Update Booking
 Route: /api/showing/update
 
-*Note: To limit complexity, I have made this function update only the booked seats. If the user were to change the showing they could go about this by deleting the existing booking and creating a new one.
+*Note: To limit complexity, I have made this function update only the booked seats. If the user were to change the showing they could go about this by deleting the existing booking and creating a new one.*
 
 Required Data: 
 
