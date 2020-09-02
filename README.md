@@ -131,7 +131,7 @@ Json Example:
 {
   "movie_id": 1,
   "screen_id": 1,
-  "start_time": "2020-09-13 10:00:00";
+  "start_time": "2020-09-13 10:00:00"
 }
 ```
 
@@ -152,7 +152,7 @@ Json Example:
   "id": 1,
   "movie_id": 2,
   "screen_id": 1,
-  "start_time": "2020-09-14 14:30:00";
+  "start_time": "2020-09-14 14:30:00"
 }
 ```
 
@@ -172,6 +172,67 @@ Json Example:
   "id": 1
 }
 ```
+
+### Bookings
+
+#### Create Booking
+Route: /api/booking/create
+
+Required Data: 
+
+- customer_id - database id of the customer making a booking
+- showing_id - database id of the showing the customer is booking
+- requested_seats - array of seat database ids for seats being booked by customer
+
+Json Example:
+
+```json
+{
+  "customer_id": 1,
+  "showing_id": 1,
+  "requested_seats": [1, 2, 3]
+}
+```
+
+#### Update Booking
+Route: /api/showing/update
+
+*Note: To limit complexity, I have made this function update only the booked seats. If the user were to change the showing they could go about this by deleting the existing booking and creating a new one.
+
+Required Data: 
+
+- id - database id of the booking being updated
+- requested_seats - array of Seat database ids for new seats being added to booking by customer
+- removed_seats - array of **BookedSeat** database ids for old booked seats being removed from the booking
+
+Json Example:
+
+```json
+{
+  "id": 1,
+  "requested_seats": [4, 5],
+  "removed_seats": [2, 3]
+}
+```
+*Note: Empty Arrays can be sent to avoid adding or removing any seats if not needed*
+
+
+#### Delete Booking
+Route: /api/booking/delete
+
+Required Data: 
+
+- id - the database id of the booking record being deleted
+
+Json Example:
+
+```json
+{
+  "id": 1
+}
+```
+
+*Note: This will delete all realated Booked Seat records*
 
 
 
